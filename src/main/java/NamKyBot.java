@@ -19,27 +19,22 @@ public class NamKyBot {
             }
 
             if (command.equalsIgnoreCase("list")) {
-                if (tasks.isEmpty()) {
-                    System.out.println("No commands recorded yet.");
-                } else {
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println((i + 1) + ". " 
-                        + "[" + tasks.get(i).getStatus() + "]" + " "
-                        + tasks.get(i));
-                    }
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println((i + 1) + "." + tasks.get(i));
                 }
                 continue;
             }
+
 
             if (command.startsWith("mark")) {
                 String[] parts = command.split(" ");
                 int index = Integer.parseInt(parts[1]) - 1;
                 Task markedTask = tasks.get(index);
-                // tasks.get(index).mark();
                 markedTask.mark();
                 System.out.println(
                     "Nice job, I have taken note: \n"
-                    + "[" + markedTask.getStatus() + "] " + markedTask.toString()
+                    + markedTask.toString()
                 );
                 continue;
             }
@@ -51,14 +46,51 @@ public class NamKyBot {
                 markedTask.unmark();
                 System.out.println(
                     "Nice job, I have taken note: \n"
-                    + "[" + markedTask.getStatus() + "] " + markedTask.toString()
+                    + markedTask.toString()
                 );
                 continue;
             }
 
-            Task task = new Task(command);
-            tasks.add(task);
-            System.out.println("added: " + command);
+            if (command.startsWith("todo")) {
+                String description = command.substring(5);
+
+                Task task = new Todo(description);
+                tasks.add(task);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task);
+                continue;
+            }
+
+            if (command.startsWith("deadline")) {
+                String[] parts = command.split("by ");
+
+                String description = parts[0].substring(9);
+                String by = parts[1];
+
+                Task task = new Deadline(description, by);
+                tasks.add(task);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task);
+                continue;
+            }
+
+
+           if (command.startsWith("event")) {
+                String[] parts = command.split(" from | to ");
+                String description = parts[0].substring(6);
+                String from = parts[1];
+                String to = parts[2];
+
+                Task task = new Event(description, from, to);
+                tasks.add(task);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task);
+                continue;
+            }
+
         }
     }
 }

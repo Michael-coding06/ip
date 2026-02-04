@@ -1,8 +1,10 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
 
     public Task(String description) {
+        // this.type = type;
         this.description = description;
         this.isDone = false;
     }
@@ -21,6 +23,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return "[" + getStatus() + "] " + description + "(";
     }
 }
