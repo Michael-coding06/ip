@@ -23,6 +23,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatus() + "] " + description + "(";
+        return "[" + getStatus() + "] " + description;
     }
 }
