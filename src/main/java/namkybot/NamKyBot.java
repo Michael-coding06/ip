@@ -1,12 +1,11 @@
 package namkybot;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class NamKyBot {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final List<Task> tasks = new ArrayList<>();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         greet();
@@ -43,6 +42,9 @@ public class NamKyBot {
                     break;
                 case "event":
                     addEvent(command);
+                    break;
+                case "delete":
+                    delete(command);
                     break;
                 default:
                     throw new NamKyBotException("What's thatttt?. I dont understand");
@@ -82,7 +84,7 @@ public class NamKyBot {
         } catch (NumberFormatException e) {
             throw new NamKyBotException("Task number must be a number.");
         }
-        if (index < 1 || index >= tasks.size()) {
+        if (index < 0 || index > tasks.size()) {
             throw new NamKyBotException("That task number does not exist.");
         }
 
@@ -95,6 +97,29 @@ public class NamKyBot {
 
         System.out.println("Nice job, I have taken note:");
         System.out.println("  " + task);
+    }
+
+    private static void delete(String command) throws NamKyBotException{
+        String[] parts = command.split(" ");
+
+        if (parts.length < 2) {
+            throw new NamKyBotException("Please specify the task number.");
+        }
+
+        int index;
+        try {
+            index = Integer.parseInt(parts[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new NamKyBotException("Task number must be a number.");
+        }
+        if (index < 0 || index > tasks.size()) {
+            throw new NamKyBotException("That task number does not exist.");
+        }
+
+        System.out.println("Well done, you finished something.");
+        System.out.println(tasks.get(index));
+        tasks.remove(index);
+        System.out.println("Only " + tasks.size() + " left to go. Letsss gooo !!!");
     }
 
     private static void addTodo(String command) throws NamKyBotException{
