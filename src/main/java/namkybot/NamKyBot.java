@@ -36,21 +36,27 @@ public class NamKyBot {
                     break;
                 case "mark":
                     markTask(command, true);
+                    saveTasks();
                     break;
                 case "unmark":
                     markTask(command, false);
+                    saveTasks();
                     break;
                 case "todo":
                     addTodo(command);
+                    saveTasks();
                     break;
                 case "deadline":
                     addDeadline(command);
+                    saveTasks();
                     break;
                 case "event":
                     addEvent(command);
+                    saveTasks();
                     break;
                 case "delete":
                     delete(command);
+                    saveTasks();
                     break;
                 default:
                     throw new NamKyBotException("What's thatttt?. I dont understand");
@@ -123,7 +129,6 @@ public class NamKyBot {
         }
     }
 
-
     private static void greet() {
         System.out.println("Hello! I'm NamKyBot");
         System.out.println("What can I do for you?");
@@ -138,7 +143,6 @@ public class NamKyBot {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
-        // saveTasks();
     }
 
     private static void markTask(String command, boolean mark) throws  NamKyBotException{
