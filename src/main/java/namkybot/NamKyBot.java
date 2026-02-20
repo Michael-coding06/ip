@@ -1,13 +1,19 @@
 package namkybot;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class NamKyBot {
     private static final Scanner scanner = new Scanner(System.in);
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
+        loadTasks();
         greet();
 
         while (true) {
@@ -55,6 +61,69 @@ public class NamKyBot {
         }
     }
 
+    public static void loadTasks() {
+        try {
+            File file = new File("NamKyBot.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                String type = line.substring(1, 2);
+                boolean isDone = line.substring(4, 5).equals("X");
+                String description = line.substring(7);
+
+                Task task = null;
+                String[] parts;
+
+                switch (type) {
+                case "T":
+                    task = new Todo(description);
+                    break;
+
+                case "D":
+                    parts = description.split(" \\(by: ");
+                    task = new Deadline(parts[0], parts[1].replace(")", ""));
+                    break;
+
+                case "E":
+                    parts = description.split(" \\(from: | to: ");
+                    task = new Event(parts[0], parts[1], parts[2].replace(")", ""));
+                    break;
+
+                default:
+                    System.out.println("Unknown task type.");
+                    continue; 
+                }
+
+                if (isDone) {
+                    task.mark();
+                }
+
+                tasks.add(task);
+            }
+
+            scanner.close();
+
+        } catch (FileNotFoundException e) {
+        }
+    }
+
+    public static void saveTasks() {
+        try {
+            FileWriter writer = new FileWriter("NamKyBot.txt");
+            for (Task task : tasks) {
+                writer.write(task.toString());
+                writer.write(System.lineSeparator());
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error saving tasks.");
+        }
+    }
+
+
     private static void greet() {
         System.out.println("Hello! I'm NamKyBot");
         System.out.println("What can I do for you?");
@@ -69,6 +138,7 @@ public class NamKyBot {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
+        // saveTasks();
     }
 
     private static void markTask(String command, boolean mark) throws  NamKyBotException{
