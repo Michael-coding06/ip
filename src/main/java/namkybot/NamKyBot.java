@@ -79,7 +79,7 @@ public class NamKyBot {
                 boolean isDone = line.substring(4, 5).equals("X");
                 String description = line.substring(7);
 
-                Task task = null;
+                Task task;
                 String[] parts;
 
                 switch (type) {
@@ -106,7 +106,9 @@ public class NamKyBot {
                     task.mark();
                 }
 
-                tasks.add(task);
+                if (task != null) {
+                    tasks.add(task);
+                }
             }
 
             scanner.close();
