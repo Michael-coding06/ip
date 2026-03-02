@@ -1,2 +1,3 @@
-[T][ ] sell books
-[E][ ] meeting (from: 3am to: 4pm)
+[T][ ] return book
+[D][ ] return bookkk(by: Thursday)
+[E][ ] interview (from: 13pm to: 15pm)
