@@ -6,7 +6,6 @@ public class Task {
     protected String type;
 
     public Task(String description) {
-        // this.type = type;
         this.description = description;
         this.isDone = false;
     }

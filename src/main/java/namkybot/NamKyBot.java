@@ -1,5 +1,7 @@
 package namkybot;
 
+import java.util.ArrayList;
+
 public class NamKyBot {
 
     private static Storage storage = new Storage("NamKyBot.txt");
@@ -86,6 +88,13 @@ public class NamKyBot {
                     Task task = new Event(parts[0], parts[1], parts[2]);
                     addTask(task);
                     storage.save(tasks.getAll());
+                    break;
+                }
+
+                case "find": {
+                    String findString = Parser.parseFindKeyword(command);
+                    ArrayList<Task> matches = tasks.findTask(findString);
+                    ui.showMatchingTasks(matches);
                     break;
                 }
 

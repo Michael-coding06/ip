@@ -7,6 +7,16 @@ public class Parser {
         return parts[0].toLowerCase();
     }
 
+    public static String parseFindKeyword(String command) throws NamKyBotException {
+        String[] parts = command.trim().split(" ", 2);
+
+        if (parts.length < 2 || parts[1].isEmpty()) {
+            throw new NamKyBotException("Please provide a keyword to search");
+        }
+
+        return parts[1].trim();
+    }
+
     public static int parseIndex(String command) throws NamKyBotException {
         String[] parts = command.trim().split(" ");
 

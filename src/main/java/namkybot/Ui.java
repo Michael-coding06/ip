@@ -55,4 +55,11 @@ public class Ui {
         System.out.println(task);
         System.out.println("Only " + size + " left to go. Letsss gooo !!!");
     }
+
+    public void showMatchingTasks(ArrayList<Task> tasks) {
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(" " + (i + 1) + "." + tasks.get(i));
+        }
+    }
 }

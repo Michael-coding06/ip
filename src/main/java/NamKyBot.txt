@@ -1,3 +1,3 @@
-[T][ ] return book
-[D][ ] return bookkk(by: Thursday)
-[E][ ] interview (from: 13pm to: 15pm)
+[D][X] return bookkk (by: Thursday)
+[D][ ] buy book (by: monday)
+[D][X] submit assignment (by: today)
