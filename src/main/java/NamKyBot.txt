@@ -1,3 +1,1 @@
-[D][X] return bookkk (by: Thursday)
-[D][ ] buy book (by: monday)
-[D][X] submit assignment (by: today)
+[D][X] return book (by: Monday)
