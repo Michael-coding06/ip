@@ -1,5 +1,9 @@
 package namkybot;
-
+/**
+ * Entry point of the NamKyBot application
+ * 
+ * Responsible for intializing core components such as the Ui, storage, parser and commands
+ */
 import java.util.ArrayList;
 
 public class NamKyBot {

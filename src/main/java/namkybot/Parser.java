@@ -1,12 +1,19 @@
 package namkybot;
-
+/**
+ * Hanles persing of user input commands.
+ * 
+ * Extract command keywords and parameters from raw user input,
+ * and throw exceptions accrodingly.
+ */
 public class Parser {
 
+    // Extract command keyword from user input.
     public static String getKeyword(String command) {
         String[] parts = command.split(" ", 2);
         return parts[0].toLowerCase();
     }
 
+    // Parses and returns the keyword for the search command
     public static String parseFindKeyword(String command) throws NamKyBotException {
         String[] parts = command.trim().split(" ", 2);
 
@@ -17,6 +24,7 @@ public class Parser {
         return parts[1].trim();
     }
 
+    // Parses and returns the task index from a command
     public static int parseIndex(String command) throws NamKyBotException {
         String[] parts = command.trim().split(" ");
 
@@ -35,6 +43,7 @@ public class Parser {
         }
     }
 
+    // Parses and returns the detail of the "todo" task
     public static String parseTodoDescription(String command) throws NamKyBotException {
         if (command.length() <= 5) {
             throw new NamKyBotException("Please add description.");
@@ -46,6 +55,7 @@ public class Parser {
         return description;
     }
 
+    // Parses and returns the detail of the "deadline" task
     public static String[] parseDeadline(String command) throws NamKyBotException {
         if (!command.contains("by")) {
             throw new NamKyBotException("A deadline must have a 'by' time.");
@@ -62,6 +72,7 @@ public class Parser {
         return new String[]{description, by};
     }
     
+    // Parses and returns the detail of the "event" task
     public static String[] parseEvent(String command) throws NamKyBotException {
         if (!command.contains(" from ") || !command.contains(" to ")) {
             throw new NamKyBotException("An event must have 'from' and 'to'.");

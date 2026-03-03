@@ -1,5 +1,7 @@
 package namkybot;
-
+/**
+ * Handles the loading and saving of task list to a localfile (as declared as filePath)
+ */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +17,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load tasks from the storage file
+     * 
+     * Parses each line and reconstructs the corresponding Task objects (todo, deadline, or event)
+     * Returns a list of tasks loaded from the file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -66,6 +74,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given list of tasks to the storage file
+     * 
+     * Each task is written using its string representation, 
+     * with 1 task per line 
+     * Example of a task would be: [D][ ] buy book (by: monday)
+     */
     public void save(ArrayList<Task> tasks) {
         try {
             FileWriter writer = new FileWriter(filePath);

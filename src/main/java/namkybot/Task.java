@@ -1,5 +1,8 @@
 package namkybot;
-
+/**
+ * This represents a taks in NamKyBot.
+ * A task basically has a description, a type and a marked/unmarked status
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -10,6 +13,7 @@ public class Task {
         this.isDone = false;
     }
 
+    // Display the mark status
     public String getStatus() {
         return this.isDone ? "X" : " ";
     }

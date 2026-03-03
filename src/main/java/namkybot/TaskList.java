@@ -1,5 +1,9 @@
 package namkybot;
-
+/**
+ * Manages a collection of tasks.
+ * 
+ * Have methods to add, get, remove, and search tasks
+ */
 import java.util.ArrayList;
 
 public class TaskList {
@@ -34,6 +38,7 @@ public class TaskList {
         return tasks;
     }
 
+    // return tasks that have similar characters to the keyword.
     public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
 
